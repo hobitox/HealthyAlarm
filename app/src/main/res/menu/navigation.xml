@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/basic_alarm"
+        android:icon="@drawable/ic_basic_alarm"
+        android:title=""/>
+
+    <item
+        android:id="@+id/protect_yoursleep"
+        android:icon="@drawable/ic_protect_your_sleep"
+        android:title=""/>
+</menu>
