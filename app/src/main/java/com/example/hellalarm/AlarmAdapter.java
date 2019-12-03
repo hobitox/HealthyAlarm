@@ -34,7 +34,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
             super(itemView);
             Timetext=itemView.findViewById(R.id.textView2);
             Label=itemView.findViewById(R.id.textView3);
-            id=itemView.findViewById(R.id.textView);
+//            id=itemView.findViewById(R.id.textView);
             aSwitch=itemView.findViewById(R.id.switch1);
 //            aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //                @Override
@@ -73,7 +73,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
 
         holder.Timetext.setText(name);
         holder.Label.setText(label);
-        holder.id.setText(String.valueOf(id));
+//        holder.id.setText(String.valueOf(id));
         final int HOUR = mCursor.getInt(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_HOUR));
         final int MINUTE = mCursor.getInt(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_MINUTE));
         final int MON = mCursor.getInt(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_MON ));

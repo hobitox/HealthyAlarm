@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class BasicAlarm_Fragment extends Fragment {
     public static AlarmAdapter mAdapter;
     @Nullable
@@ -42,7 +44,7 @@ public class BasicAlarm_Fragment extends Fragment {
         }).attachToRecyclerView(recyclerView);
 
 
-        Button btnthem=v.findViewById(R.id.btnthem);
+        FloatingActionButton btnthem=v.findViewById(R.id.btnthem);
         btnthem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

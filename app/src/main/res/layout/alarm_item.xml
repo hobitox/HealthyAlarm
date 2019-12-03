@@ -1,38 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:background="@drawable/rectangle1">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="211dp"
+        android:layout_height="92dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="10dp"
         android:text="emptyitem"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"/>
+        android:textAppearance="@style/some_id" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="132dp"
+        android:layout_height="32dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="172dp"
+        android:layout_marginTop="44dp"
+        android:gravity="top"
         android:text="Label"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"/>
+        android:textAppearance="@style/label" />
 
     <Switch
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="On/Off"
-        android:checked="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"/>
-</LinearLayout>
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="40dp"
+        android:checked="true" />
+</RelativeLayout>

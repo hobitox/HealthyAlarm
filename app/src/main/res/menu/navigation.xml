@@ -3,11 +3,11 @@
 
     <item
         android:id="@+id/basic_alarm"
-        android:icon="@drawable/ic_basic_alarm"
-        android:title=""/>
+        android:title="Alarm"
+
+        />
 
     <item
         android:id="@+id/protect_yoursleep"
-        android:icon="@drawable/ic_protect_your_sleep"
-        android:title=""/>
+        android:title="Suggest"/>
 </menu>

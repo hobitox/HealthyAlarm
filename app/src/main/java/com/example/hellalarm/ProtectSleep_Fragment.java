@@ -1,6 +1,7 @@
 package com.example.hellalarm;
 
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ public class ProtectSleep_Fragment extends Fragment implements AdapterView.OnIte
         View v = inflater.inflate(R.layout.protectsleep_fragment,container,false);
         label = v.findViewById(R.id.label_protectsleep);
         timePicker = v.findViewById(R.id.timepick2);
+        timePicker.setIs24HourView(DateFormat.is24HourFormat((getActivity())));
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
