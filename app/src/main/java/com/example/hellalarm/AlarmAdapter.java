@@ -34,7 +34,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
             super(itemView);
             Timetext=itemView.findViewById(R.id.textView2);
             Label=itemView.findViewById(R.id.textView3);
-            id=itemView.findViewById(R.id.textView);
+//            id=itemView.findViewById(R.id.textView);
             aSwitch=itemView.findViewById(R.id.switch1);
 //            aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //                @Override
