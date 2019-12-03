@@ -19,7 +19,6 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
          final String CREATE_ALARMS_TABLE = "CREATE TABLE " +
                  AlarmEntry.TABLE_NAME + " (" +
                  AlarmEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                 AlarmEntry.COLUMN_TIME + " TEXT NOT NULL, " +
                  AlarmEntry.COLUMN_HOUR + " INTEGER NOT NULL, " +
                  AlarmEntry.COLUMN_MINUTE + " INTEGER NOT NULL, " +
                  AlarmEntry.COLUMN_MON + " INTEGER NOT NULL, "+

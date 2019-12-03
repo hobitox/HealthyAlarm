@@ -7,7 +7,6 @@ public class AlarmContract  {
     private AlarmContract(){}
     public static final class AlarmEntry implements BaseColumns{
         public static final String TABLE_NAME="AlarmList";
-        public static final String COLUMN_TIME="time";
         public static final String COLUMN_HOUR="HOUR";
         public static final String COLUMN_MINUTE="MINUTE";
         public static final String COLUMN_MON="MON";

@@ -44,7 +44,7 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
         View view = inflater.inflate(R.layout.addalarm_dialog,null);
 
         timePicker= view.findViewById(R.id.timepick);
-        timePicker.setIs24HourView(DateFormat.is24HourFormat((getActivity())));
+        timePicker.setIs24HourView(DateFormat.is24HourFormat(getActivity()));
         textView=view.findViewById(R.id.label);
         onetime=view.findViewById(R.id.onetime);
 

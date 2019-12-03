@@ -106,10 +106,8 @@ public class MainActivity extends AppCompatActivity implements Alarm_Dialog.Alar
         /**
          * Add thong tin vao bang trong sqlite va cap nhat lai man hinh
          */
-        String timetext = DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
         ContentValues cv= new ContentValues();
         String templabel= "" + label;
-        cv.put(AlarmContract.AlarmEntry.COLUMN_TIME,timetext);
         cv.put(AlarmContract.AlarmEntry.COLUMN_HOUR,hourtoset);
         cv.put(AlarmContract.AlarmEntry.COLUMN_MINUTE,minutetoset);
         cv.put(AlarmContract.AlarmEntry.COLUMN_LABEL,templabel);

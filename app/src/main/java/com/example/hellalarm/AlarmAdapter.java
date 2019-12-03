@@ -15,6 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+
 
 public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHolder> {
 
@@ -63,7 +66,6 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
             return;
         }
 
-        String name = mCursor.getString(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_TIME));
         final String label=mCursor.getString(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_LABEL));
         /**
          * Lay id cua alarm trong sql gan vao tung item trong recyclerview
@@ -71,11 +73,22 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
         final long id = mCursor.getLong(mCursor.getColumnIndex(AlarmContract.AlarmEntry._ID));
         holder.itemView.setTag(id);
 
-        holder.Timetext.setText(name);
-        holder.Label.setText(label);
-        holder.id.setText(String.valueOf(id));
         final int HOUR = mCursor.getInt(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_HOUR));
         final int MINUTE = mCursor.getInt(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_MINUTE));
+
+        Calendar c= Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY,HOUR);
+        c.set(Calendar.MINUTE,MINUTE);
+        c.set(Calendar.SECOND,0);
+
+        /**
+         * Add thong tin vao bang trong sqlite va cap nhat lai man hinh
+         */
+        String timetext = DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
+        holder.Timetext.setText(timetext);
+        holder.Label.setText(label);
+        holder.id.setText(String.valueOf(id));
+
         final int MON = mCursor.getInt(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_MON ));
         final int TUES = mCursor.getInt(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_TUES));
         final int WED = mCursor.getInt(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_WED));
