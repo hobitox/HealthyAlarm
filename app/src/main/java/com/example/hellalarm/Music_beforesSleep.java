@@ -40,7 +40,7 @@ public class Music_beforesSleep extends Fragment {
         seekBar = v.findViewById(R.id.seekbar);
         time = v.findViewById(R.id.timetostop);
 
-        mediaPlayer = MediaPlayer.create(v.getContext(),R.raw.relax1);
+        mediaPlayer = MediaPlayer.create(v.getContext(),R.raw.nhacchuong1);
 
         timetostop=0;
 
@@ -59,11 +59,11 @@ public class Music_beforesSleep extends Fragment {
                         if(mediaPlayer.isPlaying()){
                             mediaPlayer.stop();
                             mediaPlayer.reset();
-                            mediaPlayer = MediaPlayer.create(view.getContext(),R.raw.relax1);
+                            mediaPlayer = MediaPlayer.create(view.getContext(),R.raw.nhacchuong1);
                             mediaPlayer.start();
                             mediaPlayer.setLooping(true);
                         } else {
-                            mediaPlayer = MediaPlayer.create(view.getContext(),R.raw.relax1);
+                            mediaPlayer = MediaPlayer.create(view.getContext(),R.raw.nhacchuong1);
                         }
 
 
@@ -72,11 +72,11 @@ public class Music_beforesSleep extends Fragment {
                         if(mediaPlayer.isPlaying()){
                             mediaPlayer.stop();
                             mediaPlayer.reset();
-                            mediaPlayer = MediaPlayer.create(view.getContext(),R.raw.relax2);
+                            mediaPlayer = MediaPlayer.create(view.getContext(),R.raw.nhacchuong2);
                             mediaPlayer.start();
                             mediaPlayer.setLooping(true);
                         } else {
-                            mediaPlayer = MediaPlayer.create(view.getContext(),R.raw.relax2);
+                            mediaPlayer = MediaPlayer.create(view.getContext(),R.raw.nhacchuong2);
                         }
                         break;
                 }

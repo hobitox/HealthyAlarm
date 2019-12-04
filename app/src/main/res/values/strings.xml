@@ -4,17 +4,11 @@
     <string-array name="Sound">
         <item>Sound 1</item>
         <item>Sound 2</item>
-        <item>Sound 3</item>
-        <item>Sound 4</item>
-        <item>Sound 5</item>
     </string-array>
 
     <string-array name="Sound_Relax">
         <item>Relax 1</item>
         <item>Relax 2</item>
-        <item>Relax 3</item>
-        <item>Relax 4</item>
-        <item>Relax 5</item>
     </string-array>
 
 </resources>
