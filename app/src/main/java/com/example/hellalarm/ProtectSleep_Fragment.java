@@ -1,5 +1,9 @@
 package com.example.hellalarm;
 
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -19,6 +23,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.Calendar;
+
 public class ProtectSleep_Fragment extends Fragment implements AdapterView.OnItemSelectedListener{
     TimePicker timePicker;
     TextView label;
@@ -34,6 +40,9 @@ public class ProtectSleep_Fragment extends Fragment implements AdapterView.OnIte
     int mins2;
     int mins3;
     int Sound;
+
+    private SoundPool soundPool;
+    private int sound1, sound2;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -81,10 +90,42 @@ public class ProtectSleep_Fragment extends Fragment implements AdapterView.OnIte
                 }
             }
         });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build();
+
+            soundPool = new SoundPool.Builder()
+                    .setMaxStreams(2)
+                    .setAudioAttributes(audioAttributes)
+                    .build();
+        } else {
+            soundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+        }
+
+        sound1 = soundPool.load(v.getContext(), R.raw.nhacchuong1, 1);
+        sound2 = soundPool.load(v.getContext(), R.raw.nhacchuong2, 1);
+        Button playandpause= v.findViewById(R.id.playandpause2);
+        playandpause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (Sound) {
+                    case 0:
+                        soundPool.play(sound1, 1, 1, 0, 0, 1);
+                        break;
+                    case 1:
+                        soundPool.play(sound2, 1, 1, 0, 0, 1);
+                        break;
+                }
+            }
+        });
         return v;
     }
 
     private void changetime(int hourOfDay, int minute){
+        Calendar c= Calendar.getInstance();
+
         hour1=hourOfDay;
         mins1=minute;
         hour1 +=4;
@@ -96,7 +137,13 @@ public class ProtectSleep_Fragment extends Fragment implements AdapterView.OnIte
         if(hour1>=24){
             hour1 -=24;
         }
-        rdbtn1.setText(hour1+":"+mins1);
+        c.set(Calendar.HOUR_OF_DAY,hour1);
+        c.set(Calendar.MINUTE,mins1);
+        c.set(Calendar.SECOND,0);
+
+        String timetext = java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(c.getTime());
+
+        rdbtn1.setText(timetext);
 
         hour2=hourOfDay;
         mins2=minute;
@@ -104,7 +151,13 @@ public class ProtectSleep_Fragment extends Fragment implements AdapterView.OnIte
         if(hour2>=24){
             hour2 -=24;
         }
-        rdbtn2.setText(hour2+":"+mins2);
+        c.set(Calendar.HOUR_OF_DAY,hour2);
+        c.set(Calendar.MINUTE,mins2);
+        c.set(Calendar.SECOND,0);
+
+        timetext = java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(c.getTime());
+
+        rdbtn2.setText(timetext);
 
         hour3=hourOfDay;
         mins3=minute;
@@ -117,7 +170,13 @@ public class ProtectSleep_Fragment extends Fragment implements AdapterView.OnIte
         if(hour3>=24){
             hour3 -=24;
         }
-        rdbtn3.setText(hour3+":"+mins3);
+        c.set(Calendar.HOUR_OF_DAY,hour3);
+        c.set(Calendar.MINUTE,mins3);
+        c.set(Calendar.SECOND,0);
+
+        timetext = java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(c.getTime());
+
+        rdbtn3.setText(timetext);
     }
 
     @Override

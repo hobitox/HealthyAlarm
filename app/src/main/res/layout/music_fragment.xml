@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text=">"
+        android:id="@+id/btnPlay"
+        android:layout_marginTop="150dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"/>
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="&gt;&gt;"
+        android:id="@+id/btnFor"
+        android:layout_marginTop="150dp"
+        android:layout_toRightOf="@id/btnPlay"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"/>
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="&lt;&lt;"
+        android:id="@+id/btnBack"
+        android:layout_marginTop="150dp"
+        android:layout_toLeftOf="@id/btnPlay"
+        android:layout_marginRight="20dp"
+        android:textSize="20dp"/>
+
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/seekbar"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="100dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:text="Time to stop(mins): "/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timetostop"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="280dp"
+        android:hint="0 mins"
+        android:inputType="number"/>
+
+    <Spinner
+        android:id="@+id/sound_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="400dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
+        android:text="Sound: "/>
+
+</RelativeLayout>

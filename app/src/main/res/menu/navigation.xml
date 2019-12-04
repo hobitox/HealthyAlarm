@@ -10,4 +10,8 @@
     <item
         android:id="@+id/protect_yoursleep"
         android:title="Suggest"/>
+
+    <item
+        android:id="@+id/music_beforesleep"
+        android:title="Music"/>
 </menu>

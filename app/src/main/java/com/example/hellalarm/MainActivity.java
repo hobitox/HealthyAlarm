@@ -217,6 +217,9 @@ public class MainActivity extends AppCompatActivity implements Alarm_Dialog.Alar
                 case R.id.protect_yoursleep:
                     selectedFragment = new ProtectSleep_Fragment();
                     break;
+                case R.id.music_beforesleep:
+                    selectedFragment = new Music_beforesSleep();
+                    break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
             return true;

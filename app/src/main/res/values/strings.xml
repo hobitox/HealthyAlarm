@@ -9,4 +9,12 @@
         <item>Sound 5</item>
     </string-array>
 
+    <string-array name="Sound_Relax">
+        <item>Relax 1</item>
+        <item>Relax 2</item>
+        <item>Relax 3</item>
+        <item>Relax 4</item>
+        <item>Relax 5</item>
+    </string-array>
+
 </resources>

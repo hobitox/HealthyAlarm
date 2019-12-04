@@ -4,12 +4,17 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
@@ -34,6 +39,9 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
     boolean EDIT=false;
     int Sound;
     int id;
+
+    private SoundPool soundPool;
+    private int sound1, sound2;
 
     private AlarmDialogListener listener;
     @Override
@@ -130,7 +138,6 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
         }
 
         builder.setView(view)
-                .setTitle("Edit Alarm")
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -155,8 +162,40 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
                                 id);
                     }
                 });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build();
+
+            soundPool = new SoundPool.Builder()
+                    .setMaxStreams(2)
+                    .setAudioAttributes(audioAttributes)
+                    .build();
+        } else {
+            soundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+        }
+
+        sound1 = soundPool.load(view.getContext(), R.raw.nhacchuong1, 1);
+        sound2 = soundPool.load(view.getContext(), R.raw.nhacchuong2, 1);
+        Button playandpause= view.findViewById(R.id.playandpause);
+        playandpause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (Sound){
+                    case 0:
+                        soundPool.play(sound1, 1, 1, 0, 0, 1);
+                        break;
+                    case 1:
+                        soundPool.play(sound2, 1, 1, 0, 0, 1);
+                        break;
+                }
+            }
+        });
         return builder.create();
     }
+
+
 
     @Override
     public void onAttach(Context context) {
