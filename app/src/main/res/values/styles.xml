@@ -7,11 +7,22 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowNoTitle">true</item>
+
     </style>
     <style name="some_id">
 
         <item name="android:textSize">
             64sp
+        </item>
+
+        <item name="android:textColor">
+            #FFFFFF
+        </item>
+    </style>
+    <style name="switch1">
+
+        <item name="android:textSize">
+            20sp
         </item>
 
         <item name="android:textColor">

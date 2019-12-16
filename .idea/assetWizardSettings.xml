@@ -3,6 +3,11 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
+        <entry key="imageWizard">
+          <value>
+            <PersistentState />
+          </value>
+        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -28,8 +33,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="checkboxselected" />
-                            <entry key="sourceFile" value="C:\Users\USER" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="sunday" />
+                            <entry key="sourceFile" value="C:\Users\toant\Desktop\HellAlarm-\app\design\Sunday.svg" />
                           </map>
                         </option>
                       </PersistentState>

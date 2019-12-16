@@ -28,7 +28,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
         mCursor=cursor;
     }
     public class AlarmViewHolder extends RecyclerView.ViewHolder{
-        public TextView id;
+
         public TextView Timetext;
         public TextView Label;
         public Switch aSwitch;
@@ -87,7 +87,6 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
         String timetext = DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
         holder.Timetext.setText(timetext);
         holder.Label.setText(label);
-        holder.id.setText(String.valueOf(id));
 
         final int MON = mCursor.getInt(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_MON ));
         final int TUES = mCursor.getInt(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_TUES));

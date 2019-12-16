@@ -18,6 +18,9 @@ import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener {
     int TimePicker_hour;
     int Timepicker_minute;
@@ -45,7 +48,7 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
 
         timePicker= view.findViewById(R.id.timepick);
         timePicker.setIs24HourView(DateFormat.is24HourFormat(getActivity()));
-        textView=view.findViewById(R.id.label);
+        textView =view.findViewById(R.id.label);
         onetime=view.findViewById(R.id.onetime);
 
         Spinner spinner = view.findViewById(R.id.sound_spinner);
@@ -130,7 +133,7 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
         }
 
         builder.setView(view)
-                .setTitle("Edit Alarm")
+
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
