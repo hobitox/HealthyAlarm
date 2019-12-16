@@ -9,7 +9,9 @@
 
     <item
         android:id="@+id/protect_yoursleep"
-        android:title="Suggest"/>
+        android:title="Suggest"
+
+        />
 
     <item
         android:id="@+id/music_beforesleep"
