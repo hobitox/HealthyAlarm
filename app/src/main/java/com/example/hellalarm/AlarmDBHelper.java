@@ -31,8 +31,12 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
                  AlarmEntry.COLUMN_ONE_TIME + " INTEGER NOT NULL, "+
                  AlarmEntry.COLUMN_LABEL + " TEXT NOT NULL, "+
                  AlarmEntry.COLUMN_SOUND + " INTEGER NOT NULL, "+
+                 AlarmEntry.COLUMN_ENABLE + " INTEGER NOT NULL, "+
                  AlarmEntry.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
                 ");";
+
+
+
 
         db.execSQL(CREATE_ALARMS_TABLE);
     }

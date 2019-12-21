@@ -84,6 +84,13 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
         holder.Timetext.setText(timetext);
         holder.Label.setText(label);
 
+        if(mCursor.getInt(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_ENABLE ))==1){
+            holder.aSwitch.setChecked(true);
+        }
+        else {
+            holder.aSwitch.setChecked(false);
+        }
+
         final int MON = mCursor.getInt(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_MON ));
         final int TUES = mCursor.getInt(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_TUES));
         final int WED = mCursor.getInt(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_WED));
@@ -109,7 +116,6 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
                 bundle.putInt("FRI",FRI);
                 bundle.putInt("SAT",SAT);
                 bundle.putInt("SUN",SUN);
-                bundle.putInt("ONETIME",ONETIME);
                 bundle.putBoolean("EDIT",true);
                 bundle.putInt("ID",(int)id);
                 dialog.setArguments(bundle);

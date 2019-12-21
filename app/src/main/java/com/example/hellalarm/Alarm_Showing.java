@@ -10,6 +10,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class Alarm_Showing extends AppCompatActivity {
@@ -21,6 +22,7 @@ public class Alarm_Showing extends AppCompatActivity {
     SensorManager sensorManager;
     SensorEventListener stepDetector;
     Sensor sensor;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -28,6 +30,8 @@ public class Alarm_Showing extends AppCompatActivity {
         setContentView(R.layout.activity_alarm__showing);
         stepcount_view=findViewById(R.id.stepcount);
         first_num=false;
+        progressBar=findViewById(R.id.progress_countstep);
+        progressBar.setMax(15);
         sensorManager= (SensorManager) getSystemService(SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
 
@@ -41,6 +45,9 @@ public class Alarm_Showing extends AppCompatActivity {
                     }
                     curStep = (int) event.values[0];
                    stepcount_view.setText(String.valueOf(curStep- stepCount));
+
+                   progressBar.setProgress(curStep-stepCount);
+
                    if((curStep- stepCount)>= 15)
                    {
                        //sensorManager.unregisterListener((SensorEventListener) Alarm_Showing.this);

@@ -19,6 +19,7 @@ public class AlarmContract  {
         public static final String COLUMN_ONE_TIME="ONETIME";
         public static final String COLUMN_LABEL="LABEL";
         public static final String COLUMN_SOUND="SOUND";
+        public static final String COLUMN_ENABLE="ENABLE";
         public static final String COLUMN_TIMESTAMP = "timestamp";
     }
 }

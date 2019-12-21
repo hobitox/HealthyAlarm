@@ -11,4 +11,7 @@
         <item>Relax 2</item>
     </string-array>
 
+    <string name="sleep_time">Sleep Time</string>
+    <string name="wake_up_time">Wake Up Time</string>
+
 </resources>

@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/rectangle5"
+    android:background="@drawable/back"
     android:orientation="vertical">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemTextColor="@color/menu_item"
         app:menu="@menu/navigation"
         app:itemTextAppearanceActive="@style/navigation_avtive"
         app:itemTextAppearanceInactive="@style/navigation_inactive"/>
@@ -20,14 +19,7 @@
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="678dp" />
-
-
-    <!--    <fragment-->
-    <!--        android:id="@+id/fragment1"-->
-    <!--        android:name="com.example.hellalarm.BasicAlarm_Fragment"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent" />-->
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

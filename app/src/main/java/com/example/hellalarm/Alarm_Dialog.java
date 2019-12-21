@@ -28,7 +28,6 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
     int Timepicker_minute;
     TextView textView;
     TimePicker  timePicker;
-    CheckBox onetime;
     CheckBox MON;
     CheckBox TUES;
     CheckBox WED;
@@ -54,7 +53,6 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
         timePicker= view.findViewById(R.id.timepick);
         timePicker.setIs24HourView(DateFormat.is24HourFormat(getActivity()));
         textView=view.findViewById(R.id.label);
-        onetime=view.findViewById(R.id.onetime);
 
         Spinner spinner = view.findViewById(R.id.sound_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
@@ -63,37 +61,6 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
-        onetime.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    MON.setChecked(false);
-                    TUES.setChecked(false);
-                    WED.setChecked(false);
-                    THURS.setChecked(false);
-                    FRI.setChecked(false);
-                    SAT.setChecked(false);
-                    SUN.setChecked(false);
-
-                    MON.setClickable(false);
-                    TUES.setClickable(false);
-                    WED.setClickable(false);
-                    THURS.setClickable(false);
-                    FRI.setClickable(false);
-                    SAT.setClickable(false);
-                    SUN.setClickable(false);
-                }
-                else{
-                    MON.setClickable(true);
-                    TUES.setClickable(true);
-                    WED.setClickable(true);
-                    THURS.setClickable(true);
-                    FRI.setClickable(true);
-                    SAT.setClickable(true);
-                    SUN.setClickable(true);
-                }
-            }
-        });
         MON=view.findViewById(R.id.checkBox);
         TUES=view.findViewById(R.id.checkBox2);
         WED=view.findViewById(R.id.checkBox3);
@@ -129,9 +96,6 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
             if(bundle.getInt("SUN")==1){
                 SUN.setChecked(true);
             }
-            if(bundle.getInt("ONETIME")==1){
-                onetime.setChecked(true);
-            }
 
             EDIT=bundle.getBoolean("EDIT");
             id=bundle.getInt("ID");
@@ -147,6 +111,15 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        boolean onetime;
+                        if(MON.isChecked()==TUES.isChecked()==WED.isChecked()==THURS.isChecked()==FRI.isChecked()
+                        ==SAT.isChecked()==SUN.isChecked()==false){
+                            onetime=true;
+                        }
+                        else{
+                            onetime=false;
+                        }
+
                         TimePicker_hour= timePicker.getCurrentHour();
                         Timepicker_minute=timePicker.getCurrentMinute();
                         listener.applyTime(TimePicker_hour,Timepicker_minute, textView.getText(), Sound,
@@ -157,7 +130,7 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
                                 FRI.isChecked(),
                                 SAT.isChecked(),
                                 SUN.isChecked(),
-                                onetime.isChecked(),
+                                onetime,
                                 EDIT,
                                 id);
                     }

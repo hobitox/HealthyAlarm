@@ -1,141 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/dialogcolor">
 
     <TimePicker
         android:id="@+id/timepick"
         android:layout_width="match_parent"
         android:layout_height="140dp"
+        android:layout_marginTop="50dp"
         android:timePickerMode="spinner"
+
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        android:background="@color/White" />
+
 
     <EditText
         android:id="@+id/label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Label"
-        app:layout_constraintTop_toBottomOf="@+id/timepick"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_marginTop="300dp"/>
 
-    <CheckBox
-        android:id="@+id/onetime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Only One Time"
-        app:layout_constraintTop_toBottomOf="@+id/label"
-        tools:layout_editor_absoluteX="0dp" />
+
+
 
     <CheckBox
         android:id="@+id/checkBox4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="12dp"
-        android:button="@drawable/checkbox_selector"
-        app:layout_constraintStart_toEndOf="@+id/checkBox3"
-        app:layout_constraintTop_toBottomOf="@+id/onetime" />
+        android:layout_marginStart="137dp"
+        android:layout_marginTop="250dp"
+        android:button="@drawable/checkbox_thursday"
+         />
 
     <CheckBox
         android:id="@+id/checkBox3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="12dp"
-        android:button="@drawable/checkbox_selector"
-        app:layout_constraintStart_toEndOf="@+id/checkBox2"
-        app:layout_constraintTop_toBottomOf="@+id/onetime" />
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="250dp"
+        android:button="@drawable/checkbox_wednesday" />
 
     <CheckBox
         android:id="@+id/checkBox2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="12dp"
-        android:button="@drawable/checkbox_selector"
-        app:layout_constraintStart_toEndOf="@+id/checkBox"
-        app:layout_constraintTop_toBottomOf="@+id/onetime" />
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="250dp"
+        android:button="@drawable/checkbox_tuesday" />
 
     <CheckBox
         android:id="@+id/checkBox7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="12dp"
-        android:button="@drawable/checkbox_selector"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="250dp"
+        android:button="@drawable/checkbox_sunday"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/checkBox6"
-        app:layout_constraintTop_toBottomOf="@+id/onetime" />
+        app:layout_constraintHorizontal_bias="0.0"/>
 
     <CheckBox
         android:id="@+id/checkBox6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="12dp"
-        android:button="@drawable/checkbox_selector"
-        app:layout_constraintStart_toEndOf="@+id/checkBox5"
-        app:layout_constraintTop_toBottomOf="@+id/onetime" />
+        android:layout_marginStart="227dp"
+        android:layout_marginTop="250dp"
+        android:button="@drawable/checkbox_saturday" />
 
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="12dp"
-        android:button="@drawable/checkbox_selector"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/onetime" />
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="250dp"
+        android:button="@drawable/checkbox_monday" />
 
     <CheckBox
         android:id="@+id/checkBox5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="12dp"
-        android:button="@drawable/checkbox_selector"
-        app:layout_constraintStart_toEndOf="@+id/checkBox4"
-        app:layout_constraintTop_toBottomOf="@+id/onetime" />
+        android:layout_marginStart="182dp"
+        android:layout_marginTop="250dp"
+        android:button="@drawable/checkbox_friday" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="360dp"
         android:text="Sound: "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        android:textAppearance="@style/switch1"/>
 
     <Spinner
         android:id="@+id/sound_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox6" />
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="360dp"
+        android:background="@drawable/song" />
 
     <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/playandpause"
-        android:layout_width="61dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="8dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.033"
-        app:layout_constraintStart_toEndOf="@+id/sound_spinner"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
+        android:layout_marginTop="360dp"
+        android:layout_marginStart="160dp"
+        android:text="||>" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</RelativeLayout>

@@ -11,9 +11,7 @@
         android:id="@+id/img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/asset31"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        />
+        android:layout_centerInParent="true"
+        android:src="@drawable/asset31" />
 
 </RelativeLayout>

@@ -1,11 +1,13 @@
 package com.example.hellalarm;
 
-import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.SoundPool;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.format.DateFormat;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +23,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import java.util.Calendar;
 
-public class ProtectSleep_Fragment extends Fragment implements AdapterView.OnItemSelectedListener{
+public class ProtectSleep_Fragment extends Fragment  {
     TimePicker timePicker;
-    TextView label;
+
     RadioGroup radioGroup;
     RadioButton rdbtn1;
     RadioButton rdbtn2;
@@ -39,18 +42,16 @@ public class ProtectSleep_Fragment extends Fragment implements AdapterView.OnIte
     int mins1;
     int mins2;
     int mins3;
-    int Sound;
-
-    private SoundPool soundPool;
-    private int sound1, sound2;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.protectsleep_fragment,container,false);
-        label = v.findViewById(R.id.label_protectsleep);
+
         timePicker = v.findViewById(R.id.timepick2);
+        timePicker.setIs24HourView(true);
         timePicker.setIs24HourView(DateFormat.is24HourFormat((getActivity())));
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
                 changetime(hourOfDay,minute);
@@ -63,12 +64,7 @@ public class ProtectSleep_Fragment extends Fragment implements AdapterView.OnIte
         changetime(timePicker.getCurrentHour(),timePicker.getCurrentMinute());
         add=v.findViewById(R.id.btnthem_protectsleep);
 
-        Spinner spinner = v.findViewById(R.id.sound_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(v.getContext(),
-                R.array.Sound, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,51 +74,22 @@ public class ProtectSleep_Fragment extends Fragment implements AdapterView.OnIte
                 }
                 else{
                     if(rdbtn1.isChecked()){
-                        ((MainActivity)getActivity()).additem(hour1,mins1, label.getText(),Sound,false,false,false,false,false,false,false,true,false,0);
+                        ((MainActivity)getActivity()).additem(hour1,mins1, "wake up",0,false,false,false,false,false,false,false,true,false,0);
                     }
                     else if(rdbtn2.isChecked()){
-                        ((MainActivity)getActivity()).additem(hour2,mins2, label.getText(),Sound,false,false,false,false,false,false,false,true,false,0);
+                        ((MainActivity)getActivity()).additem(hour2,mins2, "wake up",0,false,false,false,false,false,false,false,true,false,0);
                     }
                     else if(rdbtn3.isChecked()){
-                        ((MainActivity)getActivity()).additem(hour3,mins3, label.getText(),Sound,false,false,false,false,false,false,false,true,false,0);
+                        ((MainActivity)getActivity()).additem(hour3,mins3, "wake up",0,false,false,false,false,false,false,false,true,false,0);
                     }
-                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, new BasicAlarm_Fragment()).commit();
-                }
-            }
-        });
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .build();
-
-            soundPool = new SoundPool.Builder()
-                    .setMaxStreams(2)
-                    .setAudioAttributes(audioAttributes)
-                    .build();
-        } else {
-            soundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
-        }
-
-        sound1 = soundPool.load(v.getContext(), R.raw.nhacchuong1, 1);
-        sound2 = soundPool.load(v.getContext(), R.raw.nhacchuong2, 1);
-        Button playandpause= v.findViewById(R.id.playandpause2);
-        playandpause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (Sound) {
-                    case 0:
-                        soundPool.play(sound1, 1, 1, 0, 0, 1);
-                        break;
-                    case 1:
-                        soundPool.play(sound2, 1, 1, 0, 0, 1);
-                        break;
+                    ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.basic_alarm);
                 }
             }
         });
         return v;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void changetime(int hourOfDay, int minute){
         Calendar c= Calendar.getInstance();
 
@@ -137,13 +104,19 @@ public class ProtectSleep_Fragment extends Fragment implements AdapterView.OnIte
         if(hour1>=24){
             hour1 -=24;
         }
+
         c.set(Calendar.HOUR_OF_DAY,hour1);
         c.set(Calendar.MINUTE,mins1);
         c.set(Calendar.SECOND,0);
 
         String timetext = java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(c.getTime());
+        String timesleep="\n4.5 hours sleep";
 
-        rdbtn1.setText(timetext);
+        Spannable colorSpan = new SpannableString(timetext+timesleep);
+        colorSpan.setSpan(new RelativeSizeSpan(0.5f), timetext.length(),colorSpan.length(), 0); // set size
+        colorSpan.setSpan(new ForegroundColorSpan(Color.GRAY), timetext.length(), colorSpan.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        rdbtn1.setText(colorSpan);
+
 
         hour2=hourOfDay;
         mins2=minute;
@@ -151,13 +124,18 @@ public class ProtectSleep_Fragment extends Fragment implements AdapterView.OnIte
         if(hour2>=24){
             hour2 -=24;
         }
+
         c.set(Calendar.HOUR_OF_DAY,hour2);
         c.set(Calendar.MINUTE,mins2);
         c.set(Calendar.SECOND,0);
 
-        timetext = java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(c.getTime());
+        String timetext2 = java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(c.getTime());
+        String timesleep2="\n6 hours sleep";
+        colorSpan = new SpannableString(timetext2+timesleep2);
+        colorSpan.setSpan(new RelativeSizeSpan(0.5f), timetext2.length(),colorSpan.length(), 0); // set size
+        colorSpan.setSpan(new ForegroundColorSpan(Color.GRAY), timetext2.length(), colorSpan.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        rdbtn2.setText(colorSpan);
 
-        rdbtn2.setText(timetext);
 
         hour3=hourOfDay;
         mins3=minute;
@@ -174,18 +152,11 @@ public class ProtectSleep_Fragment extends Fragment implements AdapterView.OnIte
         c.set(Calendar.MINUTE,mins3);
         c.set(Calendar.SECOND,0);
 
-        timetext = java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(c.getTime());
-
-        rdbtn3.setText(timetext);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Sound = position;
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
+        String timetext3 = java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(c.getTime());
+        String timesleep3="\n7.5 hours sleep";
+        colorSpan = new SpannableString(timetext3+timesleep3);
+        colorSpan.setSpan(new RelativeSizeSpan(0.5f), timetext3.length(),colorSpan.length(), 0); // set size
+        colorSpan.setSpan(new ForegroundColorSpan(Color.GRAY), timetext3.length(), colorSpan.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        rdbtn3.setText(colorSpan);
     }
 }

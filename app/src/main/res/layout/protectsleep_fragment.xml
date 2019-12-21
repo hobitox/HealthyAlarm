@@ -2,109 +2,110 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back"
+    android:orientation="vertical">
+
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Time You Want To Sleep: "
+        android:fontFamily="@font/segoeuib"
+        android:text="@string/sleep_time"
+        android:textAppearance="@style/sleep_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TimePicker
         android:id="@+id/timepick2"
-        android:layout_width="410dp"
-        android:layout_height="127dp"
+        android:theme="@style/NumberPickerStyle"
+        android:layout_width="0dp"
+        android:layout_height="156dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/bg_1"
         android:timePickerMode="spinner"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-    <EditText
-        android:id="@+id/label_protectsleep"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timepick2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_weight="50"/>
 
     <RadioGroup
         android:id="@+id/radiogrp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/bg_1"
+        android:divider="?android:dividerHorizontal"
+        android:showDividers="middle"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6">
+
 
         <RadioButton
             android:id="@+id/radioButton1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:button="@null"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:drawableRight="@drawable/checkbox_radiobtn_protectscreen"
+            android:textSize="30sp" />
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:button="@null"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:drawableRight="@drawable/checkbox_radiobtn_protectscreen"
+            android:textSize="30sp" />
 
         <RadioButton
             android:id="@+id/radioButton3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:button="@null"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:drawableRight="@drawable/checkbox_radiobtn_protectscreen"
+            android:textSize="30sp" />
+
     </RadioGroup>
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Time You Want To Wake Up: "
+        android:fontFamily="@font/segoeuib"
+        android:text="@string/wake_up_time"
+        android:textAppearance="@style/wake_up_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_protectsleep" />
+        app:layout_constraintTop_toBottomOf="@+id/timepick2" />
 
     <Button
         android:id="@+id/btnthem_protectsleep"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_width="123dp"
+        android:layout_height="41dp"
+        android:background="@drawable/bg_btnprotectscreen"
         android:text="Add Alarm"
-        app:layout_constraintTop_toBottomOf="@+id/sound_spinner"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <Spinner
-        android:id="@+id/sound_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/radiogrp" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Sound: "
+        android:textAllCaps="false"
+        android:textColor="@color/White"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radiogrp" />
 
-    <Button
-        android:id="@+id/playandpause2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.02"
-        app:layout_constraintStart_toEndOf="@+id/sound_spinner"
-        app:layout_constraintTop_toBottomOf="@+id/radiogrp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

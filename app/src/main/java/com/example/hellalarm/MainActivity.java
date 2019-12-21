@@ -26,16 +26,16 @@ import java.util.Calendar;
 import static com.example.hellalarm.AlarmReceiver.setAlarm;
 
 public class MainActivity extends AppCompatActivity implements Alarm_Dialog.AlarmDialogListener {
-    private AlarmAdapter mAdapter;
     private SQLiteDatabase mDatabase;
     private AlarmManager alarmManager;
+    BottomNavigationView bottomNav;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-        BottomNavigationView bottomNav = findViewById(R.id.nav);
+        bottomNav = findViewById(R.id.nav);
         bottomNav.setOnNavigationItemSelectedListener(listener);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new BasicAlarm_Fragment()).commit();
@@ -51,49 +51,12 @@ public class MainActivity extends AppCompatActivity implements Alarm_Dialog.Alar
 //        recyclerView.setAdapter(mAdapter);
         alarmManager= (AlarmManager) getSystemService(ALARM_SERVICE);
 
-        /**
-         * Thao tac vuot de xoa alarm khoi SQL
-         */
-//        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
-//                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-//
-//            @Override
-//            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-//                return false;
-//            }
-//
-//            @Override
-//            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-//                removeItem((long) viewHolder.itemView.getTag());
-//            }
-//
-//
-//        }).attachToRecyclerView(recyclerView);
 
-//        Button btnthem=findViewById(R.id.btnthem);
-//        btnthem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //additem();
-//                Alarm_Dialog dialog= new Alarm_Dialog();
-//                dialog.show(getSupportFragmentManager(),"Edit ALarm");
-//            }
-//        });
 
-//        Button btncancel=findViewById(R.id.btncancel);
-//        btncancel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                cancleService();
-//                Intent intent= new Intent(getBaseContext(), Alarm_Showing.class );
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                getBaseContext().startActivity(intent);
-//
-//            }
-//        });
         registerReceiver(broadcastReceiver,new IntentFilter("CANCELALARM"));
         registerReceiver(broadcastReceiver2,new IntentFilter("ON"));
         registerReceiver(broadcastReceiver3,new IntentFilter("OFF"));
+
     }
 
     public void additem(int hourtoset, int minutetoset, CharSequence label,int sound, boolean MON, boolean TUES, boolean WED, boolean THURS, boolean FRI, boolean SAT,boolean SUN, boolean onetime, boolean EDIT, int idtoedit){
@@ -120,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements Alarm_Dialog.Alar
         cv.put(AlarmContract.AlarmEntry.COLUMN_SUN,SUN ? 1: 0);
         cv.put(AlarmContract.AlarmEntry.COLUMN_ONE_TIME,onetime ? 1: 0);
         cv.put(AlarmContract.AlarmEntry.COLUMN_SOUND,sound);
+        cv.put(AlarmContract.AlarmEntry.COLUMN_ENABLE,1);
 
         long id=0;
         if(EDIT==false) {
@@ -143,6 +107,8 @@ public class MainActivity extends AppCompatActivity implements Alarm_Dialog.Alar
          * set Alarm manager
          */
         setAlarm(this,c.getTimeInMillis(),label,sound,MON,TUES,WED,THURS,FRI,SAT,SUN,onetime,(int)id,false);
+
+
 
         Toast.makeText(getApplicationContext(),"Add alarm succeed",Toast.LENGTH_SHORT).show();
 
@@ -195,6 +161,11 @@ public class MainActivity extends AppCompatActivity implements Alarm_Dialog.Alar
         sendBroadcast(intent);
         alarmManager.cancel(pendingIntent);
 
+        ContentValues cv= new ContentValues();
+        cv.put(AlarmContract.AlarmEntry.COLUMN_ENABLE,0);
+        final String where = AlarmContract.AlarmEntry._ID + "=?";
+        final String[] whereArgs = new String[] { String.valueOf(id) };
+        mDatabase.update(AlarmContract.AlarmEntry.TABLE_NAME,cv,where,whereArgs);
 
         Toast.makeText(getApplicationContext(),"Alarm cancled",Toast.LENGTH_SHORT).show();
     }
@@ -206,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements Alarm_Dialog.Alar
         additem(hourtoset, minutetoset, label,sound, MON, TUES, WED, THURS, FRI, SAT, SUN,onetime, EDIT, id);
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener listener= new BottomNavigationView.OnNavigationItemSelectedListener() {
+    public BottomNavigationView.OnNavigationItemSelectedListener listener= new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             Fragment selectedFragment = null;
@@ -229,15 +200,17 @@ public class MainActivity extends AppCompatActivity implements Alarm_Dialog.Alar
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            removeItem(intent.getExtras().getInt("id"));
+            ContentValues cv= new ContentValues();
+            cv.put(AlarmContract.AlarmEntry.COLUMN_ENABLE,0);
+            final String where = AlarmContract.AlarmEntry._ID + "=?";
+            final String[] whereArgs = new String[] { String.valueOf(intent.getExtras().getInt("id")) };
+            mDatabase.update(AlarmContract.AlarmEntry.TABLE_NAME,cv,where,whereArgs);
         }
     };
 
     BroadcastReceiver broadcastReceiver2 = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            //cancelAlarm((long)intent.getExtras().getInt("id"));
-            //removeItem(intent.getExtras().getInt("id"));
             Bundle bundle=intent.getBundleExtra("BUNDLE");
             int hourtoset=bundle.getInt("HOUR");
             int minutetoset=bundle.getInt("MINUTE");
