@@ -9,6 +9,7 @@
         <item name="windowNoTitle">true</item>
 
     </style>
+
     <style name="some_id">
 
         <item name="android:textSize">
@@ -75,11 +76,21 @@
         </item>
 
     </style>
+    <style name="Style_TextView">
+        <item name="fontFamily">@font/segoe</item>
+    </style>
     <style name="wake_up_time">
 
         <item name="android:textSize">
             36sp
         </item>
+
+    <style name="MyBase.TimePicker" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize"> 30sp </item>
+        <item name="android:text"></item>
+    </style>
+
 
         <item name="android:textColor">
             #FFFFFF

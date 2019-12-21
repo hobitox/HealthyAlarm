@@ -173,17 +173,17 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-       try {
-           listener = (AlarmDialogListener) context;
-       } catch (ClassCastException e){
-           throw new ClassCastException(context.toString() +
-                   "must implement AlarmDialogListener");
-       }
+        try {
+            listener = (AlarmDialogListener) context;
+        } catch (ClassCastException e){
+            throw new ClassCastException(context.toString() +
+                    "must implement AlarmDialogListener");
+        }
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-         Sound = position;
+        Sound = position;
     }
 
     @Override

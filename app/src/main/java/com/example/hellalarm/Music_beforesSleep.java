@@ -1,7 +1,7 @@
 package com.example.hellalarm;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -14,24 +14,55 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class Music_beforesSleep extends Fragment {
-    private Button btnPlay,btnBack,btnFor;
+    private Button btnBack,btnFor;
+    private Button btnStep;
+    private CheckBox btnPlay;
     private SeekBar seekBar;
     private MediaPlayer mediaPlayer;
     private Runnable runnable;
     private Runnable stopat;
     private Handler handler;
     private EditText time;
+    private TextView timeMusicRun;
+    private TextView timeMusicLength;
     private int timetostop;
+    private  int positionMusic;
     private int music;
+    private ArrayList<MediaPlayer> mediaPlayerArrayList;
+    private RecyclerView listMusic;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private BroadcastReceiver broadcastReceiver;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+    }
 
     @Nullable
     @Override
@@ -44,11 +75,34 @@ public class Music_beforesSleep extends Fragment {
         handler = new Handler();
         seekBar = v.findViewById(R.id.seekbar);
         time = v.findViewById(R.id.timetostop);
+        timeMusicRun = v.findViewById(R.id.textViewMusicLength);
+        timeMusicLength = v.findViewById(R.id.textMusicTime);
+        btnStep = v.findViewById(R.id.btnStep);
 
-        mediaPlayer = MediaPlayer.create(v.getContext(), R.raw.nhacchuong1);
 
-        timetostop = 0;
+        mediaPlayer = MediaPlayer.create(v.getContext(),R.raw.nhacchuong1);
+        listMusic = v.findViewById(R.id.listMusic);
+        listMusic.setHasFixedSize(true);
+        mediaPlayerArrayList = new ArrayList<>();
+        listMusic.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+
+        mediaPlayerArrayList.add(mediaPlayer);
+        mediaPlayerArrayList.add(MediaPlayer.create(v.getContext(),R.raw.nhacchuong2));
+        mAdapter=new SoundAdapter(mediaPlayerArrayList,getActivity());
+        listMusic.setAdapter(mAdapter);
+
+        timetostop=0;
+
+
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                positionMusic = intent.getExtras().getInt("posM");
+            }
+        };
+        getActivity().registerReceiver(broadcastReceiver,new IntentFilter("Select Music"));
+        //getActivity().registerReceiver(broadcastReceiver,new IntentFilter("Select Music"));
         Spinner spinner = v.findViewById(R.id.sound_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(v.getContext(),
                 R.array.Sound_Relax, android.R.layout.simple_spinner_item);
@@ -93,17 +147,36 @@ public class Music_beforesSleep extends Fragment {
             }
         });
 
-        btnPlay.setOnClickListener(new View.OnClickListener() {
+
+        btnStep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mediaPlayer.isPlaying()) {
-                    mediaPlayer.pause();
-                    btnPlay.setText(">");
-                } else {
+                BottomSheetStepDialog bottomSheetDialog = new BottomSheetStepDialog();
+                bottomSheetDialog.show(getActivity().getSupportFragmentManager(),"ssss");
+            }
+        });
 
-                    mediaPlayer.start();
-                    mediaPlayer.setLooping(true);
-                    btnPlay.setText("||");
+        btnPlay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Toast.makeText(getActivity(),"Selected Music OK" +positionMusic,Toast.LENGTH_SHORT).show();
+                if (buttonView.isChecked())
+                {
+                    if (mediaPlayerArrayList.get(positionMusic).isPlaying()) {
+
+                        mediaPlayerArrayList.get(positionMusic).pause();
+                    }
+                }
+                else {
+                    int duration = mediaPlayerArrayList.get(positionMusic).getDuration();
+                    String Musiclength = String.format("%02d : %02d ",
+                            TimeUnit.MILLISECONDS.toMinutes(duration),
+                            TimeUnit.MILLISECONDS.toSeconds(duration) -
+                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
+                    timeMusicLength.setText(Musiclength);
+                    mediaPlayerArrayList.get(positionMusic).start();
+                    mediaPlayerArrayList.get(positionMusic).setLooping(true);
+
                     if (!String.valueOf(time.getText()).matches("")) {
                         timetostop = Integer.parseInt(String.valueOf(time.getText()));
                         timetostop = timetostop * 1000 * 60;
@@ -112,7 +185,6 @@ public class Music_beforesSleep extends Fragment {
                 }
             }
         });
-
         btnFor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,15 +231,21 @@ public class Music_beforesSleep extends Fragment {
             @Override
             public void run() {
                 mediaPlayer.pause();
-                btnPlay.setText(">");
             }
         };
         return v;
     }
 
     private void changeSeekbar() {
-        seekBar.setProgress(mediaPlayer.getCurrentPosition());
-        if(mediaPlayer.isPlaying()){
+
+        seekBar.setProgress(mediaPlayerArrayList.get(positionMusic).getCurrentPosition());
+        int duration = mediaPlayerArrayList.get(positionMusic).getCurrentPosition();
+        String Musiclength = String.format("%02d : %02d ",
+                TimeUnit.MILLISECONDS.toMinutes(duration),
+                TimeUnit.MILLISECONDS.toSeconds(duration) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
+        timeMusicRun.setText(Musiclength);
+        if(mediaPlayerArrayList.get(positionMusic).isPlaying()){
             runnable = new Runnable() {
                 @Override
                 public void run() {

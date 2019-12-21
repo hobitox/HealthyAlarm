@@ -46,7 +46,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
 //                    }else{
 //                        mContext.sendBroadcast(new Intent("OFF").putExtra("id",Integer.parseInt(""+id.getText())));
 //                    }
-//                }
+//                }+
 //            });
         }
     }
