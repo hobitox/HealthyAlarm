@@ -11,16 +11,15 @@
             <size android:height="30dp" />
         </shape>
     </item>
-    <item android:top="320dp">
+    <item android:top="365dp">
         <shape android:shape="rectangle" >
             <corners
-                android:topRightRadius="15dp"
-                android:topLeftRadius="15dp" />
+                android:topRightRadius="50dp"
+                android:topLeftRadius="50dp" />
 
             <gradient
                 android:startColor="#ffffff"
-                android:endColor="#ffffff"
-                android:angle="270" />
+                android:endColor="#ffffff" />
         </shape>
     </item>
 </layer-list>

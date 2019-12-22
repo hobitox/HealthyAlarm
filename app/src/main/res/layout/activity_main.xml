@@ -5,17 +5,13 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/color_gradient_main"
+    android:background="@drawable/back"
     tools:context=".MainActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:itemTextAppearanceActive="@style/navigation_avtive"
         app:itemTextAppearanceInactive="@style/navigation_inactive"
         app:itemTextColor="@color/menu_item"
@@ -28,19 +24,8 @@
         android:id="@+id/fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/color_gradient_main"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nav" />
-
-
-    <!--    <fragment-->
-    <!--        android:id="@+id/fragment1"-->
-    <!--        android:name="com.example.hellalarm.BasicAlarm_Fragment"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent" />-->
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

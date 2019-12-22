@@ -23,6 +23,7 @@ public class Alarm_Showing extends AppCompatActivity {
     SensorEventListener stepDetector;
     Sensor sensor;
     ProgressBar progressBar;
+    int maxstep;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -31,7 +32,8 @@ public class Alarm_Showing extends AppCompatActivity {
         stepcount_view=findViewById(R.id.stepcount);
         first_num=false;
         progressBar=findViewById(R.id.progress_countstep);
-        progressBar.setMax(15);
+        maxstep=getIntent().getExtras().getInt("STEP");
+        progressBar.setMax(maxstep);
         sensorManager= (SensorManager) getSystemService(SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
 
@@ -48,7 +50,7 @@ public class Alarm_Showing extends AppCompatActivity {
 
                    progressBar.setProgress(curStep-stepCount);
 
-                   if((curStep- stepCount)>= 15)
+                   if((curStep- stepCount)>= maxstep)
                    {
                        //sensorManager.unregisterListener((SensorEventListener) Alarm_Showing.this);
                        Intent intent=new Intent(getBaseContext(),AlarmReceiver.class);

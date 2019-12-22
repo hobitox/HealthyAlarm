@@ -36,18 +36,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
             super(itemView);
             Timetext=itemView.findViewById(R.id.textView2);
             Label=itemView.findViewById(R.id.textView3);
-//            id=itemView.findViewById(R.id.textView);
             aSwitch=itemView.findViewById(R.id.switch1);
-//            aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                @Override
-//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                    if(isChecked){
-//                        mContext.sendBroadcast(new Intent("ON").putExtra("id",Integer.parseInt(""+id.getText())));
-//                    }else{
-//                        mContext.sendBroadcast(new Intent("OFF").putExtra("id",Integer.parseInt(""+id.getText())));
-//                    }
-//                }+
-//            });
         }
     }
 
@@ -100,6 +89,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
         final int SUN = mCursor.getInt(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_SUN));
         final int ONETIME = mCursor.getInt(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_ONE_TIME));
         final int SOUND = mCursor.getInt(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_SOUND));
+        final int STEP = mCursor.getInt(mCursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_STEP));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,6 +108,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
                 bundle.putInt("SUN",SUN);
                 bundle.putBoolean("EDIT",true);
                 bundle.putInt("ID",(int)id);
+                bundle.putInt("STEP",STEP);
                 dialog.setArguments(bundle);
                 dialog.show(((FragmentActivity) mContext).getSupportFragmentManager(),"Edit ALarm");
             }
@@ -144,6 +135,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
                     bundle.putInt("ONETIME",ONETIME);
                     bundle.putBoolean("EDIT",true);
                     bundle.putInt("ID",(int)id);
+                    bundle.putInt("STEP",STEP);
                     mContext.sendBroadcast(new Intent("ON").putExtra("BUNDLE",bundle));
                 }
             }

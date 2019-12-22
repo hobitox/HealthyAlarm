@@ -29,13 +29,16 @@ public class AlarmReceiver extends BroadcastReceiver {
              * Tao nofitication
              */
 
-            NotificationHelper notificationHelper = new NotificationHelper(context);
-            String templabel=""+intent.getExtras().getCharSequence("LABEL");
-            NotificationCompat.Builder nb = notificationHelper.getChannelNotification(templabel);
+                NotificationHelper notificationHelper = new NotificationHelper(context);
+                String templabel = "" + intent.getExtras().getCharSequence("LABEL");
+                NotificationCompat.Builder nb = notificationHelper.getChannelNotification(templabel);
             /**
              * Intent kich hoat khi an vao nofitication
              */
+
+            int step = intent.getExtras().getInt("STEP");
             Intent intent_resumeapp = new Intent(context, Alarm_Showing.class);
+            intent_resumeapp.putExtra("STEP",step);
             intent_resumeapp.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
             PendingIntent pendingIntent = PendingIntent.getActivity(context, intent.getExtras().getInt("id"), intent_resumeapp, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -51,8 +54,6 @@ public class AlarmReceiver extends BroadcastReceiver {
             music_intent.putExtra("extra", "on");
             music_intent.putExtra("SOUND",soundtoset);
             context.startService(music_intent);
-
-            Toast.makeText(context.getApplicationContext(),"Broadcast nhan intent",Toast.LENGTH_SHORT).show();
 
             /**
              * Dat lai alarm, ham nay chuan bi de sau nay set alarm theo tung ngay
@@ -70,7 +71,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             CharSequence label=intent.getExtras().getCharSequence("LABEL");
 
             if(!onetime){
-                setAlarm(context,timetoset,label,soundtoset ,MON,TUES,WED,THURS,FRI,SAT,SUN, onetime,idtoset, true);
+                setAlarm(context,timetoset,label,soundtoset ,MON,TUES,WED,THURS,FRI,SAT,SUN, onetime,idtoset, step);
             }
             else {
                 context.sendBroadcast(new Intent("CANCELALARM").putExtra("id",idtoset));
@@ -80,16 +81,14 @@ public class AlarmReceiver extends BroadcastReceiver {
             /**
              * Tat music service
              */
-            Toast.makeText(context.getApplicationContext(),"vao off",Toast.LENGTH_SHORT).show();
             Intent intent1 = new Intent(context, Music.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent1.putExtra("extra",intent.getExtras().getString("extra"));
             context.startService(intent1);
         }
     }
 
-    public static void setAlarm(Context context, long timetoset, CharSequence label ,int sound, boolean MON, boolean TUES, boolean WED, boolean THURS, boolean FRI, boolean SAT,boolean SUN, boolean onetime, int id, boolean onreset){
+    public static void setAlarm(Context context, long timetoset, CharSequence label ,int sound, boolean MON, boolean TUES, boolean WED, boolean THURS, boolean FRI, boolean SAT,boolean SUN, boolean onetime, int id, int step){
 
-        Toast.makeText(context.getApplicationContext(),"vao set alarm",Toast.LENGTH_SHORT).show();
         final Calendar c;
         if(!onetime) {
             if (MON == TUES == WED == THURS == FRI == SAT == SUN == false) {
@@ -131,6 +130,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         intent.putExtra("SUN",SUN);
         intent.putExtra("ONETIME", onetime);
         intent.putExtra("SOUND",sound);
+        intent.putExtra("STEP",step);
 
         PendingIntent pendingIntent=PendingIntent.getBroadcast(context,id,intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -156,7 +156,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
         int temp = cursor.getCount();
         cursor.close();
-        Toast.makeText(context.getApplicationContext(),"Da ton tai, " + temp,Toast.LENGTH_SHORT).show();
         return true;
     }
 
@@ -196,7 +195,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         final Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(timetoset);
 
-        final long temptime= calendar.getTimeInMillis();
         final long currentTime = System.currentTimeMillis();
         final int startIndex = getStartIndexFromTime(calendar);
 
@@ -212,7 +210,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         daysArray.put(5,SAT);
         daysArray.put(6,SUN);
 
-        int temp;
         do {
             final int index = (startIndex + count) % 7;
             isAlarmSetForDay =
@@ -221,10 +218,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                 calendar.add(Calendar.DAY_OF_MONTH, 1);
                 count++;
             }
-            temp=index;
         } while(!isAlarmSetForDay && count < 7);
 
-        Log.e("day set", String.valueOf(temp));
         return calendar;
     }
 }

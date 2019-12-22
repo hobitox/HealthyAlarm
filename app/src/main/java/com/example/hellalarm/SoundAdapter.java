@@ -42,12 +42,12 @@ public class SoundAdapter extends  RecyclerView.Adapter<SoundAdapter.ViewHolder>
                 TimeUnit.MILLISECONDS.toSeconds(duration) -
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
         holder.txtMusicLength.setText(Musiclength);
-        holder.txtNameMusic.setText("Nhac "+ position);
+        holder.txtNameMusic.setText("ReLaxing "+ (position+1));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 context.sendBroadcast(new Intent("Select Music").putExtra("posM",position));
-                Toast.makeText(context.getApplicationContext(),"Selected Music OK "+position,Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -65,8 +65,8 @@ public class SoundAdapter extends  RecyclerView.Adapter<SoundAdapter.ViewHolder>
         public ViewHolder(View itemView)
         {
             super(itemView);
-            txtNameMusic = (TextView) itemView.findViewById(R.id.textViewMusicName);
-            txtMusicLength = (TextView) itemView.findViewById(R.id.textViewMusicLength);
+            txtNameMusic =  itemView.findViewById(R.id.textViewMusicName);
+            txtMusicLength = itemView.findViewById(R.id.textViewMusicLength);
 
         }
     }

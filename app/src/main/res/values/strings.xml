@@ -2,8 +2,8 @@
     <string name="app_name">HellAlarm</string>
 
     <string-array name="Sound">
-        <item>Sound 1</item>
-        <item>Sound 2</item>
+        <item>RingTone 1</item>
+        <item>RingTone 2</item>
     </string-array>
 
     <string-array name="Sound_Relax">

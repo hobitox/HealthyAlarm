@@ -8,8 +8,8 @@
             android:shape="oval">
             <solid android:color="#698C2F94"/>
             <size
-                android:width="100dp"
-                android:height="100dp"
+                android:width="85dp"
+                android:height="85dp"
                 />
         </shape>
 
@@ -27,8 +27,8 @@
 
     </item>
     <item
-        android:width="50dp"
-        android:height="50dp"
+        android:width="30dp"
+        android:height="30dp"
         android:gravity="center"
         android:drawable="@drawable/ic_play" />
 

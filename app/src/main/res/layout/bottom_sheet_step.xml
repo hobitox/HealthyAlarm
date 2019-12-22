@@ -4,19 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet_step"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/layout_rounded_conner">
+    android:layout_height="wrap_content">
 
     <SeekBar
         android:id="@+id/seekBar"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="318dp"
         android:layout_height="112dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="30dp"
         android:max="7"
         android:progress="1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -25,8 +23,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sleep Timer"
+        android:textColor="#000"
+        android:textSize="45sp"
         app:fontFamily="@font/segoe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvprogress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="76dp"
+        android:text="asfdsafd"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toBottomOf="@+id/seekBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

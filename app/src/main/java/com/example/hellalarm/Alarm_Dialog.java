@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -38,6 +39,8 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
     boolean EDIT=false;
     int Sound;
     int id;
+    EditText stepcount;
+    int step;
 
     private SoundPool soundPool;
     private int sound1, sound2;
@@ -53,6 +56,7 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
         timePicker= view.findViewById(R.id.timepick);
         timePicker.setIs24HourView(DateFormat.is24HourFormat(getActivity()));
         textView=view.findViewById(R.id.label);
+        stepcount=view.findViewById(R.id.ETStep);
 
         Spinner spinner = view.findViewById(R.id.sound_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
@@ -99,6 +103,8 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
 
             EDIT=bundle.getBoolean("EDIT");
             id=bundle.getInt("ID");
+
+            stepcount.setText(String.valueOf(bundle.getInt("STEP")));
         }
 
         builder.setView(view)
@@ -120,6 +126,13 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
                             onetime=false;
                         }
 
+                        if (!String.valueOf(stepcount.getText()).matches("")){
+                            step=Integer.parseInt(String.valueOf(stepcount.getText()));
+                        }
+                        else {
+                            step=15;
+                        }
+
                         TimePicker_hour= timePicker.getCurrentHour();
                         Timepicker_minute=timePicker.getCurrentMinute();
                         listener.applyTime(TimePicker_hour,Timepicker_minute, textView.getText(), Sound,
@@ -132,7 +145,8 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
                                 SUN.isChecked(),
                                 onetime,
                                 EDIT,
-                                id);
+                                id,
+                                step);
                     }
                 });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -192,6 +206,6 @@ public class Alarm_Dialog extends AppCompatDialogFragment implements AdapterView
     }
 
     public interface AlarmDialogListener{
-        void applyTime(int hourtoset, int minutetoset, CharSequence label,int sound, boolean MON, boolean TUES, boolean WED, boolean THURS, boolean FRI, boolean SAT, boolean SUN, boolean onetime, boolean EDIT, int id);
+        void applyTime(int hourtoset, int minutetoset, CharSequence label,int sound, boolean MON, boolean TUES, boolean WED, boolean THURS, boolean FRI, boolean SAT, boolean SUN, boolean onetime, boolean EDIT, int id, int step);
     }
 }

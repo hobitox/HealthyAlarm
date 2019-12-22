@@ -45,10 +45,7 @@ public class MainActivity extends AppCompatActivity implements Alarm_Dialog.Alar
          */
         AlarmDBHelper dbHelper= new AlarmDBHelper(this);
         mDatabase = dbHelper.getWritableDatabase();
-//        RecyclerView recyclerView=findViewById(R.id.recyclerview);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        mAdapter=new AlarmAdapter(this,getAllItems());
-//        recyclerView.setAdapter(mAdapter);
+
         alarmManager= (AlarmManager) getSystemService(ALARM_SERVICE);
 
 
@@ -59,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements Alarm_Dialog.Alar
 
     }
 
-    public void additem(int hourtoset, int minutetoset, CharSequence label,int sound, boolean MON, boolean TUES, boolean WED, boolean THURS, boolean FRI, boolean SAT,boolean SUN, boolean onetime, boolean EDIT, int idtoedit){
+    public void additem(int hourtoset, int minutetoset, CharSequence label,int sound, boolean MON, boolean TUES, boolean WED, boolean THURS, boolean FRI, boolean SAT,boolean SUN, boolean onetime, boolean EDIT, int idtoedit,int step){
 
         Calendar c= Calendar.getInstance();
         c.set(Calendar.HOUR_OF_DAY,hourtoset);
@@ -84,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements Alarm_Dialog.Alar
         cv.put(AlarmContract.AlarmEntry.COLUMN_ONE_TIME,onetime ? 1: 0);
         cv.put(AlarmContract.AlarmEntry.COLUMN_SOUND,sound);
         cv.put(AlarmContract.AlarmEntry.COLUMN_ENABLE,1);
+        cv.put(AlarmContract.AlarmEntry.COLUMN_STEP,step);
 
         long id=0;
         if(EDIT==false) {
@@ -106,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements Alarm_Dialog.Alar
         /**
          * set Alarm manager
          */
-        setAlarm(this,c.getTimeInMillis(),label,sound,MON,TUES,WED,THURS,FRI,SAT,SUN,onetime,(int)id,false);
+        setAlarm(this,c.getTimeInMillis(),label,sound,MON,TUES,WED,THURS,FRI,SAT,SUN,onetime,(int)id,step);
 
 
 
@@ -123,10 +121,6 @@ public class MainActivity extends AppCompatActivity implements Alarm_Dialog.Alar
         BasicAlarm_Fragment fragment= (BasicAlarm_Fragment) getSupportFragmentManager().findFragmentById(R.id.basic_alarm);
         fragment.mAdapter.swapCursor(getAllItems());
 
-        /**
-         * Huy Alarm manager
-         */
-        //cancelAlarm(id);
     }
 
     public Cursor getAllItems() {
@@ -142,12 +136,6 @@ public class MainActivity extends AppCompatActivity implements Alarm_Dialog.Alar
                 null,
                 AlarmContract.AlarmEntry.COLUMN_TIMESTAMP + " DESC"
         );
-    }
-
-    private void cancleService(){
-        Intent intent=new Intent(this,AlarmReceiver.class);
-        intent.putExtra("extra","off");
-        sendBroadcast(intent);
     }
 
     public void cancelAlarm(long id) {
@@ -173,8 +161,8 @@ public class MainActivity extends AppCompatActivity implements Alarm_Dialog.Alar
 
 
     @Override
-    public void applyTime(int hourtoset, int minutetoset, CharSequence label, int sound, boolean MON, boolean TUES, boolean WED, boolean THURS, boolean FRI, boolean SAT,boolean SUN,boolean onetime, boolean EDIT,int id) {
-        additem(hourtoset, minutetoset, label,sound, MON, TUES, WED, THURS, FRI, SAT, SUN,onetime, EDIT, id);
+    public void applyTime(int hourtoset, int minutetoset, CharSequence label, int sound, boolean MON, boolean TUES, boolean WED, boolean THURS, boolean FRI, boolean SAT,boolean SUN,boolean onetime, boolean EDIT,int id, int step) {
+        additem(hourtoset, minutetoset, label,sound, MON, TUES, WED, THURS, FRI, SAT, SUN,onetime, EDIT, id, step);
     }
 
     public BottomNavigationView.OnNavigationItemSelectedListener listener= new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -253,7 +241,9 @@ public class MainActivity extends AppCompatActivity implements Alarm_Dialog.Alar
 
             int id= bundle.getInt("ID");
 
-            additem(hourtoset, minutetoset, label,sound, MON, TUES, WED, THURS, FRI, SAT, SUN,onetime, EDIT, id);
+            int step = bundle.getInt("STEP");
+
+            additem(hourtoset, minutetoset, label,sound, MON, TUES, WED, THURS, FRI, SAT, SUN,onetime, EDIT, id,step);
         }
     };
 

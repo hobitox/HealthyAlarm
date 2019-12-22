@@ -70,17 +70,16 @@ public class ProtectSleep_Fragment extends Fragment  {
             @Override
             public void onClick(View v) {
                 if(rdbtn1.isChecked()==false && rdbtn2.isChecked()==false && rdbtn3.isChecked()==false){
-                    Toast.makeText(v.getContext(),"Please Choose Time To Wake Up!",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     if(rdbtn1.isChecked()){
-                        ((MainActivity)getActivity()).additem(hour1,mins1, "wake up",0,false,false,false,false,false,false,false,true,false,0);
+                        ((MainActivity)getActivity()).additem(hour1,mins1, "wake up",0,false,false,false,false,false,false,false,true,false,0,15);
                     }
                     else if(rdbtn2.isChecked()){
-                        ((MainActivity)getActivity()).additem(hour2,mins2, "wake up",0,false,false,false,false,false,false,false,true,false,0);
+                        ((MainActivity)getActivity()).additem(hour2,mins2, "wake up",0,false,false,false,false,false,false,false,true,false,0,15);
                     }
                     else if(rdbtn3.isChecked()){
-                        ((MainActivity)getActivity()).additem(hour3,mins3, "wake up",0,false,false,false,false,false,false,false,true,false,0);
+                        ((MainActivity)getActivity()).additem(hour3,mins3, "wake up",0,false,false,false,false,false,false,false,true,false,0,15);
                     }
                     ((MainActivity)getActivity()).bottomNav.setSelectedItemId(R.id.basic_alarm);
                 }
