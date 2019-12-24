@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HellAlarm</string>
+    <string name="app_name">HealthyAlarm</string>
 
     <string-array name="Sound">
         <item>RingTone 1</item>

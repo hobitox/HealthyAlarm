@@ -69,7 +69,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
         c.set(Calendar.MINUTE,MINUTE);
         c.set(Calendar.SECOND,0);
 
-        String timetext = DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
+        String timetext = java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT).format(c.getTime());
         holder.Timetext.setText(timetext);
         holder.Label.setText(label);
 

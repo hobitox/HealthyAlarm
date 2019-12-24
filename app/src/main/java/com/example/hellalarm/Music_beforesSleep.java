@@ -95,8 +95,9 @@ public class Music_beforesSleep extends Fragment {
         mediaPlayerArrayList = new ArrayList<>();
         listMusic.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        mediaPlayerArrayList.add(MediaPlayer.create(v.getContext(),R.raw.nhacchuong1));
-        mediaPlayerArrayList.add(MediaPlayer.create(v.getContext(),R.raw.nhacchuong2));
+        mediaPlayerArrayList.add(MediaPlayer.create(v.getContext(),R.raw.khongloi1));
+        mediaPlayerArrayList.add(MediaPlayer.create(v.getContext(),R.raw.khongloi2));
+        mediaPlayerArrayList.add(MediaPlayer.create(v.getContext(),R.raw.khongloi3 ));
         mAdapter=new SoundAdapter(mediaPlayerArrayList,getActivity());
         listMusic.setAdapter(mAdapter);
 
@@ -178,12 +179,7 @@ public class Music_beforesSleep extends Fragment {
                     }
                 }
                 else {
-                    int duration = mediaPlayerArrayList.get(positionMusic).getDuration();
-                    String Musiclength = String.format("%02d : %02d ",
-                            TimeUnit.MILLISECONDS.toMinutes(duration),
-                            TimeUnit.MILLISECONDS.toSeconds(duration) -
-                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
-                    timeMusicLength.setText(Musiclength);
+
                     mediaPlayerArrayList.get(positionMusic).start();
                     mediaPlayerArrayList.get(positionMusic).setLooping(true);
 
@@ -218,6 +214,7 @@ public class Music_beforesSleep extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser) {
+
                     mediaPlayerArrayList.get(positionMusic).seekTo(progress);
                 }
             }
@@ -260,6 +257,12 @@ public class Music_beforesSleep extends Fragment {
                 mediaPlayerArrayList.get(positionMusic).setLooping(true);
             }
         }
+        int duration0 = mediaPlayerArrayList.get(positionMusic).getDuration();
+        String Musiclength0 = String.format("%02d : %02d ",
+                TimeUnit.MILLISECONDS.toMinutes(duration0),
+                TimeUnit.MILLISECONDS.toSeconds(duration0) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration0)));
+        timeMusicLength.setText(Musiclength0);
         int duration = mediaPlayerArrayList.get(positionMusic).getCurrentPosition();
         String Musiclength = String.format("%02d : %02d ",
                 TimeUnit.MILLISECONDS.toMinutes(duration),

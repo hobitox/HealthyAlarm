@@ -13,7 +13,7 @@
     <style name="some_id">
 
         <item name="android:textSize">
-            55sp
+            45sp
         </item>
 
         <item name="android:textColor">
