@@ -6,6 +6,7 @@ Teacher: Huỳnh Tuấn Anh
 # Description
 This app will help your schedule your sleep, make you satisfied and fresh when you wake up. Before you went to sleep, you could listen to soft music. This app makes sure that you will wake up on time. 
 
+- Apk file: [Download](https://drive.google.com/open?id=15CrDSv07yXu3umldX9xYNstkOn8Tvn3c)
 # Team
 
 |Student ID  |Full Name               |
